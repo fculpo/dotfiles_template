@@ -6,10 +6,13 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.zshrc: zshrc
+    ~/.zshrc: zsh/zshrc
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
+    # Install zsh plugins with Antibody
+    - [antibody bundle < ~/.dotfiles/zsh/plugins.txt > ~/.zsh-plugins.sh]
+    - [antibody update]
