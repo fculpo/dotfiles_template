@@ -1,1 +1,6 @@
 source ~/.zsh-plugins.sh 
+source ~/.dotfiles/zsh/env.zsh
+source ~/.dotfiles/zsh/options.zsh
+source ~/.dotfiles/zsh/bindings.zsh
+source ~/.dotfiles/zsh/aliases.zsh
+
