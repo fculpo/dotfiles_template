@@ -1,7 +1,6 @@
 mafredri/zsh-async
 #rupa/z
 #Tarrasch/zsh-bd
-#robbyrussell/oh-my-zsh folder:plugins/git
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 #junegunn/fzf

@@ -4,3 +4,5 @@ source ~/.dotfiles/zsh/options.zsh
 source ~/.dotfiles/zsh/bindings.zsh
 source ~/.dotfiles/zsh/aliases.zsh
 
+
+[[ -s "/home/fculpo/.gvm/scripts/gvm" ]] && source "/home/fculpo/.gvm/scripts/gvm"
