@@ -16,3 +16,4 @@
     # Install zsh plugins with Antibody
     - [antibody bundle < ~/.dotfiles/zsh/plugins.txt > ~/.zsh-plugins.sh]
     - [antibody update]
+    - [chmod -R 755 `antibody home`]
