@@ -27,7 +27,7 @@ alias kk='docker kill'
 # ls
 alias ls='ls --color=auto'
 alias la="ls -laF"
-alias ll="ls -ld"
+alias ll="ls -l"
 alias lso='ls -At1 && echo "------Oldest--"'
 alias lsn='ls -Art1 && echo "------Newest--"'
 alias a.='ls -d .*'
