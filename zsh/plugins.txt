@@ -3,7 +3,7 @@ mafredri/zsh-async
 #Tarrasch/zsh-bd
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
-#junegunn/fzf
+junegunn/fzf
 sindresorhus/pure
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search

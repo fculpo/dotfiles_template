@@ -4,5 +4,7 @@ source ~/.dotfiles/zsh/options.zsh
 source ~/.dotfiles/zsh/bindings.zsh
 source ~/.dotfiles/zsh/aliases.zsh
 
+# Load local dotfiles (not versioned)
+source ~/.aliases.zsh.local
 
-[[ -s "/home/fculpo/.gvm/scripts/gvm" ]] && source "/home/fculpo/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm" && gvm use go1.10.3 > /dev/null
