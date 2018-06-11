@@ -13,10 +13,13 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export NODE_PATH='/usr/local/lib/node_modules'
 
 # PATH
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:~/.dotfiles/bin
+PATH=$PATH:/usr/local/bin
+PATH=$PATH:$HOME/.dotfiles/bin
+PATH=$PATH:$HOME/.rbenv/bin
 
 # Remove Windows paths to Ruby since it causes conflicts with npm/bower/etc.
 PATH=$(echo :$PATH: | sed -e 's,:/mnt/c/.*:,:,g' -e 's/^://' -e 's/:$//')
 
 typeset -U PATH # Remove duplicates in $PATH
+
+export PATH
