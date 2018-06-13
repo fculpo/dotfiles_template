@@ -5,6 +5,8 @@ source ~/.dotfiles/zsh/bindings.zsh
 source ~/.dotfiles/zsh/aliases.zsh
 
 # Load local dotfiles (not versioned)
-source ~/.aliases.zsh.local
+if [[ -a ~/.*.zsh.local ]]; then
+  source ~/.*.zsh.local
+fi
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm" && gvm use go1.10.3 > /dev/null
