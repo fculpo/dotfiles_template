@@ -9,4 +9,4 @@ if [[ -a ~/.*.zsh.local ]]; then
   source ~/.*.zsh.local
 fi
 
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm" && gvm use go1.10.3 > /dev/null
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"

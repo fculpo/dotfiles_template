@@ -108,5 +108,3 @@ alias gdn='git diff --name-only'
 # Git Status
 alias gs='git status --short'
 alias gss='git show --word-diff=color' # See changes made
-
-alias cat="ccat"
