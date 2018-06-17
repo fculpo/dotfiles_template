@@ -10,11 +10,15 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
-    ~/.config/terminator/config: terminator/config
+    ~/.config/terminator:
+        create: true
+        path: terminator
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    # Install zsh plugins with Antibody
-    - [antibody bundle < ~/.dotfiles/zsh/plugins.txt > ~/.zsh-plugins.sh]
-    - [antibody update]
-    - [chmod -R 755 `antibody home`]
+    - 
+      command: if ! [ -x "$(command -v antibody)" ]; then curl -sL git.io/antibody | sh -s; fi
+      description: Installing antibody if necessary
+    - [antibody bundle < ~/.dotfiles/zsh/plugins.txt > ~/.zsh-plugins.sh, antibody bundle]
+    - [antibody update, Updating antibody]
+    - [chmod -R 755 `antibody home`, Fixing perms for autocomp]
