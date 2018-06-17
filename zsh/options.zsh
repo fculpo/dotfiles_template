@@ -1,7 +1,11 @@
-# Completions
-autoload -U compinit
-compinit
+# Change ls colours
+LS_COLORS="ow=01;36;40" && export LS_COLORS
+
+# make cd use the ls colours
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+autoload -Uz compinit
+compinit
 
 # History
 HISTSIZE=10000 # Lines of history to keep in memory for current session
