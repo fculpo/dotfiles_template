@@ -10,6 +10,7 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
+    ~/.config/terminator/config: terminator/config
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
