@@ -5,8 +5,6 @@ source ~/.dotfiles/zsh/bindings.zsh
 source ~/.dotfiles/zsh/aliases.zsh
 
 # Load local dotfiles (not versioned)
-if [[ -a ~/.*.zsh.local ]]; then
-  source ~/.*.zsh.local
-fi
+for f in ~/.*.zsh.local; do source $f; done
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
