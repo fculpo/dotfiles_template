@@ -1,17 +1,15 @@
 " Theme and Styling
 set t_Co=256
-set background=light
-colorscheme solarized
+set background=dark
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
 
 set history=200        " keep 200 lines of command line history
-set ruler              " show the cursor position all the time
 set showcmd            " display incomplete commands
-set wildmenu           " display completion matches in a status line
-set autoindent
 set expandtab          "Insert spaces instead of tabs in insert mode. Use spaces for indents"
 set showmatch
-set mouse=a
-set backspace=indent,eol,start
 
 " Set Proper Tabs
 set tabstop=4
@@ -21,7 +19,6 @@ set expandtab
 
 " Do not show default status line as we got a plugin for that
 set noshowmode
-
 
 " shows trailing whitespaces
 highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
@@ -80,10 +77,9 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
-Plug 'altercation/vim-colors-solarized'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'valloric/youcompleteme'
@@ -91,7 +87,7 @@ Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'junegunn/fzf'
-Plug 'itchyny/lightline'
+Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 
