@@ -6,8 +6,10 @@ alias crypto='curl rate.sx' # Get crypto prices
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> public key copied to pasteboard'"
 alias _='sudo'
 alias alert="tput bel" # Bell when the program is finished. i.e. npm install && alert
+
+alias compfix="compaudit | xargs chmod g-w && compaudit | xargs chown -R '$(whoami)'"
+
 # TODO: fk alias to run last cmd as sudo instantly
-alias top="vtop"
 alias how='howdoi'
 alias icat='imgcat'
 
