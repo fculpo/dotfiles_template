@@ -27,7 +27,10 @@ alias ksq='docker ps -q'
 alias kk='docker kill'
 
 # ls
-alias ls='ls --color=auto'
+#for *BSD/darwin
+export CLICOLOR=1
+ls --color=auto &> /dev/null && alias ls='ls --color=auto' ||
+#alias ls='ls --color=auto'
 alias la="ls -laF"
 alias ll="ls -l"
 alias lso='ls -At1 && echo "------Oldest--"'
