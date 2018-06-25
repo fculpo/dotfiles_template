@@ -1,0 +1,213 @@
+# i3 config file (v4)
+
+#=======================
+# Variables
+#=======================
+set $mod Mod1
+set $black       #212121
+set $darkblack   #000000
+set $red         #fb4934
+set $darkred     #cc241d
+set $green       #b8bb26
+set $gray        #8f8f8f
+set $darkgreen   #98971a
+set $darkgray    #1a1a1a
+set $midgray     #636363
+set $lightgray   #c9c9c9
+set $yellow      #fabd2f
+set $darkyellow  #d79921
+set $blue        #83a598
+set $darkblue    #458588
+set $magenta     #d3869b
+set $darkmagenta #b16286
+set $cyan        #8ec07c
+set $darkcyan    #689d6a
+set $white       #ebdbb2
+set $darkwhite   #a89984
+set $transparent #00000080
+
+
+#=======================
+# Fonts
+#=======================
+font pango:Hack, FontAwesome 12
+
+
+#=======================
+# Windows
+#=======================
+new_window none
+hide_edge_borders both
+
+gaps inner 7
+gaps outer 5
+
+#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused          $black      $black      $darkwhite  $darkblack  $darkblack
+client.unfocused        $black      $black      $white      $darkblack  $darkblack
+client.focused_inactive $black      $black      $white      $darkblack  $darkblack
+client.urgent           $darkred    $darkred    $black      $darkred    $darkred
+client.background $black
+
+
+#=======================
+# Shortcuts
+#=======================
+# Press $mod+mouse to drag windows
+floating_modifier $mod
+
+# Interactons with the i3 daemon
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-msg exit"
+
+# Basic mappings
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Return exec terminator -u
+bindsym $mod+Shift+Q kill
+bindsym $mod+r mode "resize"
+
+# Additional user-defined shortcuts
+bindsym $mod+Shift+s exec screenlock
+
+# Windows focus change
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Focus tiling/floating windows
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Toggle fullscreen on current container
+bindsym $mod+f fullscreen
+
+# Focus container's parent window
+bindsym $mod+Shift+space floating toggle
+
+# Change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Split container
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+set $ws1 	"1:   Web "
+set $ws2 	"2:   Code "
+set $ws3 	"3:   Code "
+set $ws4 	"4:   Terminal "
+set $ws5 	"5:   Terminal "
+set $ws6 	"6:   Terminal "
+set $ws7 	"7:   General "
+set $ws8	"8:   Email "
+set $ws9	"9:   Chat "
+
+# Workspaces interactions
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+
+#=======================
+# Workspaces
+#=======================
+#workspace $ws1 output HDMI1
+#workspace $ws2 output HDMI2
+#workspace $ws3 output HDMI1
+#workspace $ws4 output HDMI2
+#workspace $ws5 output HDMI1
+#workspace $ws6 output HDMI2
+#workspace $ws7 output HDMI1
+#workspace $ws8 output HDMI2
+#workspace $ws9 output HDMI1
+
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#assign [class="Firefox"]     $ws1
+#assign [class="code"]        $ws2
+#assign [class="Keepassx"]    $ws7
+#assign [class="Thunderbird"] $ws8
+#assign [class="Pidgin"]      $ws9
+
+
+#=======================
+# Menu bars
+#=======================
+bar {
+	font pango:Hack 12
+	position top
+	separator_symbol "■"
+	height 30
+	tray_padding 0
+	status_command /usr/local/bin/i3blocks -c ~/.i3blocks.conf
+	i3bar_command i3bar -t
+	workspace_buttons       yes
+	strip_workspace_numbers yes
+
+	colors {
+		statusline	$white
+		background	$transparent
+		separator	$transparent
+		                   	#BORDER   	    BACKGROUND 	    TEXT
+		focused_workspace  	$transparent 	$transparent 	$white
+		inactive_workspace 	$transparent 	$transparent 	$gray
+		active_workspace   	$transparent 	$transparent 	$gray
+		urgent_workspace   	$darkred     	$darkred	    $transparent
+		binding_mode 		$darkred 	    $darkred	    $transparent
+	}
+}
+
+
+#=======================
+# Startup
+#=======================
+#exec_always --no-startup-id numlockx on
+#exec xrandr --output HDMI1 --left-of HDMI2
+#exec xset s off -dpms
+exec /usr/bin/feh --bg-scale --no-xinerama ~/.dotfiles/wallpapers/blue_lines.jpg
+exec /usr/bin/compton -b
+#exec /usr/bin/nm-applet &
+#exec /usr/bin/redshift-gtk &
+#exec /usr/bin/volumeicon &
+#exec /usr/bin/firefox
+#exec /usr/bin/keepassx
+#exec /usr/bin/pidgin
+#exec /usr/bin/zsh -l -c "code"
+
+# Run terminal containers
+exec i3-msg 'workspace "4:   Terminal "; exec terminator -u'
+exec i3-msg 'workspace "5:   Terminal "; exec terminator -u'
+exec i3-msg 'workspace "6:   Terminal "; exec terminator -u'
+
+# Focus workspace 1 after startup
+exec sleep 1 && i3-msg 'workspace "1:   Web ";'
+exec sleep 1 && i3-msg 'workspace "2:   Code ";'
