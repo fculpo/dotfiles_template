@@ -30,7 +30,7 @@ set $transparent #00000080
 #=======================
 # Fonts
 #=======================
-font pango:Hack, FontAwesome 12
+font pango:Hack, FontAwesome 11
 
 
 #=======================
@@ -195,19 +195,15 @@ bar {
 #exec xrandr --output HDMI1 --left-of HDMI2
 #exec xset s off -dpms
 exec /usr/bin/feh --bg-scale --no-xinerama ~/.dotfiles/wallpapers/blue_lines.jpg
-exec /usr/bin/compton -b
-#exec /usr/bin/nm-applet &
-#exec /usr/bin/redshift-gtk &
-#exec /usr/bin/volumeicon &
-#exec /usr/bin/firefox
-#exec /usr/bin/keepassx
-#exec /usr/bin/pidgin
+#exec /usr/bin/compton -b
+exec --no-startup-id dunst -config ~/.config/dunstrc
 #exec /usr/bin/zsh -l -c "code"
 
 # Run terminal containers
 exec i3-msg 'workspace "4:   Terminal "; exec terminator -u'
 exec i3-msg 'workspace "5:   Terminal "; exec terminator -u'
 exec i3-msg 'workspace "6:   Terminal "; exec terminator -u'
+exec i3-msg 'workspace "9:   Chat "; exec terminator -u -l default -p poezio'
 
 # Focus workspace 1 after startup
 exec sleep 1 && i3-msg 'workspace "1:   Web ";'

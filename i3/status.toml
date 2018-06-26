@@ -17,10 +17,6 @@ interval = 20
 warning = 20.0
 alert = 10.0
 
-[[block]]
-block = "weather"
-format = "{weather} ({location}) {temp}°, {wind} km/s"
-service = { name = "openweathermap", api_key = "fb4e45c960c6c850f6b7a6078b721cac", city_id = "2996944", units = "metric" }
 
 [[block]]
 block = "memory"
@@ -43,6 +39,11 @@ block = "battery"
 device = "battery"
 interval = 10
 show = "both"
+
+[[block]]
+block = "weather"
+format = "{weather} ({location}) {temp}°, {wind} km/s"
+service = { name = "openweathermap", api_key = "fb4e45c960c6c850f6b7a6078b721cac", city_id = "2996944", units = "metric" }
 
 [[block]]
 block = "time"

@@ -37,3 +37,5 @@ source ~/.dotfiles/zsh/aliases.zsh
 for f in ~/.*.zsh.local; do source $f; done
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+cd ~
