@@ -1,0 +1,50 @@
+theme = "slick"
+icons = "awesome"
+
+[[block]]
+block = "focused_window"
+
+[[block]]
+block = "uptime"
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+
+[[block]]
+block = "weather"
+format = "{weather} ({location}) {temp}°, {wind} km/s"
+service = { name = "openweathermap", api_key = "fb4e45c960c6c850f6b7a6078b721cac", city_id = "2996944", units = "metric" }
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+
+[[block]]
+block = "cpu"
+interval = 1
+frequency = true
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m} {5m}"
+
+[[block]]
+block = "battery"
+device = "battery"
+interval = 10
+show = "both"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"

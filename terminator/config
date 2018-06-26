@@ -1,4 +1,9 @@
 [global_config]
+  borderless = True
+  dbus = False
+  handle_size = 2
+  inactive_color_offset = 0.908163265306
+  putty_paste_style = True
 [keybindings]
 [layouts]
   [[default]]

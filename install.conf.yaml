@@ -13,8 +13,7 @@
     ~/.config/terminator:
         create: true
         path: terminator
-    ~/.config/i3/config: i3/config
-    ~/.i3blocks.conf: i3/i3blocks.conf
+    ~/.config/i3: i3
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
