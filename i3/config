@@ -102,9 +102,9 @@ bindsym $mod+v split v
 set $ws1 	"1:   Web "
 set $ws2 	"2:   Code "
 set $ws3 	"3:   Code "
-set $ws4 	"4:   Terminal "
-set $ws5 	"5:   Terminal "
-set $ws6 	"6:   Terminal "
+set $ws4 	"4:   Term 1 "
+set $ws5 	"5:   Term 2 "
+set $ws6 	"6:   Term 3 "
 set $ws7 	"7:   General "
 set $ws8	"8:   Email "
 set $ws9	"9:   Chat "
@@ -195,14 +195,13 @@ bar {
 #exec xrandr --output HDMI1 --left-of HDMI2
 #exec xset s off -dpms
 exec /usr/bin/feh --bg-scale --no-xinerama ~/.dotfiles/wallpapers/blue_lines.jpg
-#exec /usr/bin/compton -b
+exec /usr/bin/compton -b
 exec --no-startup-id dunst -config ~/.config/dunstrc
-#exec /usr/bin/zsh -l -c "code"
 
 # Run terminal containers
-exec i3-msg 'workspace "4:   Terminal "; exec terminator -u'
-exec i3-msg 'workspace "5:   Terminal "; exec terminator -u'
-exec i3-msg 'workspace "6:   Terminal "; exec terminator -u'
+exec i3-msg 'workspace "4:   Term 1 "; exec terminator -u'
+exec i3-msg 'workspace "5:   Term 2 "; exec terminator -u'
+exec i3-msg 'workspace "6:   Term 3 "; exec terminator -u'
 exec i3-msg 'workspace "9:   Chat "; exec terminator -u -l default -p poezio'
 
 # Focus workspace 1 after startup
