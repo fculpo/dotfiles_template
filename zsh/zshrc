@@ -33,7 +33,4 @@ source ~/.dotfiles/zsh/options.zsh
 source ~/.dotfiles/zsh/bindings.zsh
 source ~/.dotfiles/zsh/aliases.zsh
 
-# Load local dotfiles (not versioned)
-for f in ~/.*.zsh.local; do source $f; done
-
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"

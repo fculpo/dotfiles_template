@@ -1,0 +1,67 @@
+!------------------
+!  URxvt Settings
+!------------------
+
+! scrollbar
+URxvt*scrollBar: false
+URxvt*internalBorder: 20
+
+! disable ctrl-shift
+URxvt*iso14755_52: false
+URxvt*iso14755: false
+
+!URxvt*letterSpace: -1
+
+!----------------
+!  Xft Settings
+!----------------
+
+Xft*dpi: 92
+Xft*antialias:  true
+Xft*hinting:    true
+Xft*rgba:       rgb
+Xft*autohint:   false
+Xft*hintstyle:  hintfull
+Xft*lcdfilter:  lcddefault
+
+! terminal color scheme
+*foreground:     rgb:dd/dd/dd
+*background:     rgb:22/22/22
+!black
+*color0:         rgb:19/19/19
+*color8:         rgb:25/25/25
+!red
+*color1:         rgb:80/32/32
+*color9:         rgb:98/2b/2b
+!green
+*color2:         rgb:5b/76/2f
+*color10:        rgb:89/b8/3f
+!brown/yellow
+*color3:         rgb:aa/99/43
+*color11:        rgb:ef/ef/60
+!blue
+*color4:         rgb:32/4c/80
+*color12:        rgb:2b/4f/98
+!magenta
+*color5:         rgb:70/6c/9a
+*color13:        rgb:82/6a/b1
+!cyan
+*color6:         rgb:92/b1/9e
+*color14:        rgb:a1/cd/cd
+!white
+*color7:         rgb:ff/ff/ff
+*color15:        rgb:dd/dd/dd
+
+! urxvt settings
+! transparency settings
+URxvt.depth: 32
+URxvt.background: rgba:0000/0000/0000/dddd
+! other settings
+URxvt.scrollBar:False
+URxvt.saveLines:10000
+! open URL in browser
+URxvt.matcher.button: 1
+URxvt.perl-ext-common: matcher
+
+URxvt*font: xft:Hack:size=13
+URxvt*boldfont: xft:Hack:size=13

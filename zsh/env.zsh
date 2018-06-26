@@ -12,6 +12,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # TODO: ?
 export NODE_PATH='/usr/local/lib/node_modules'
 
+# WSL
+if [ -n $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/p') ]; then
+    export LIBGL_ALWAYS_INDIRECT=1
+    export DISPLAY=:0.0
+fi
+
 # PATH
 PATH=/usr/local/bin:$PATH
 PATH=$HOME/.dotfiles/bin:$PATH

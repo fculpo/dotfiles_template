@@ -5,16 +5,20 @@
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ''
     ~/.zshrc: zsh/zshrc
+    ~/.Xdefaults:
     ~/.tmux.conf: tmux/tmux.conf
-    ~/.vim: vim
     ~/.vimrc: vimrc
     ~/.config/terminator:
         create: true
-        path: terminator
-    ~/.config/i3: i3
-    ~/.config/dunstrc: dunst/dunstrc
+        path: config/terminator
+    ~/.config/termite:
+        create: true
+        path: config/termite
+    ~/.config/i3:
+        create: true
+        path: config/i3
+    ~/.config/dunstrc: config/dunstrc
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
