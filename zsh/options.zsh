@@ -4,8 +4,6 @@ LS_COLORS="ow=01;36;40" && export LS_COLORS
 # make cd use the ls colours
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-autoload -Uz compinit
-compinit
 
 # History
 HISTSIZE=10000 # Lines of history to keep in memory for current session
@@ -23,3 +21,10 @@ setopt extended_glob # Use extended globbing syntax
 setopt auto_cd # Auto change to a dir without typing cd
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # FZF fuzzy search
+
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;

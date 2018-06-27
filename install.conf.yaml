@@ -22,3 +22,9 @@
     -
       command: if [ ! -f ~/.vim/autoload/plug.vim ]; then curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; fi;
       description: Install vimplug if not already
+    -
+      command: if ! [ -x "$(command -v antibody)" ]; then curl -sL git.io/antibody | sh -s; fi
+      description: Installing antibody if necessary
+    - [antibody bundle < ~/.dotfiles/zsh/plugins.txt > ~/.zsh-plugins.sh, antibody bundle]
+    - [antibody update, Updating antibody]
+    - [chmod -R 755 `antibody home`, Fixing perms for autocomp]

@@ -1,36 +1,35 @@
+zmodload zsh/zpty
+
 # workaround for WSL
 unsetopt BG_NICE
 
-source ~/.zplug/init.zsh
-
-zplug "mafredri/zsh-async"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "junegunn/fzf"
-zplug "sindresorhus/pure"
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-# Set the priority when loading
-# e.g., zsh-syntax-highlighting must be loaded
-# after executing compinit command and sourcing other plugins
-# (If the defer tag is given 2 or above, run after compinit command)
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:2
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
-
+source ~/.zsh-plugins.sh
 source ~/.dotfiles/zsh/env.zsh
 source ~/.dotfiles/zsh/options.zsh
 source ~/.dotfiles/zsh/bindings.zsh
 source ~/.dotfiles/zsh/aliases.zsh
+
+#=======================
+# Agents
+#=======================
+
+export XDG_RUNTIME_DIR=~/.ssh
+
+if [ ! -S "$XDG_RUNTIME_DIR/ssh-agent.sock" ]; then
+    eval `ssh-agent -a $XDG_RUNTIME_DIR/ssh-agent.sock` &>/dev/null
+else
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.sock"
+fi
+
+if [ ! -f "$XDG_RUNTIME_DIR/gpg-agent.info" ]; then
+    gpg-agent --daemon --write-env-file $XDG_RUNTIME_DIR/gpg-agent.info &>/dev/null
+else
+    source $XDG_RUNTIME_DIR/gpg-agent.info
+    export GPG_AGENT_INFO
+fi
+
+#=======================
+# GVM
+#=======================
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
