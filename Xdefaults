@@ -7,8 +7,8 @@ URxvt*iso14755_52: false
 URxvt*iso14755: false
 
 URxvt*letterSpace: -1
-URxvt*font: xft:Hack:size=14
-URxvt*boldfont: xft:Hack:size=14
+URxvt*font: xft:Hack:size=13
+URxvt*boldfont: xft:Hack:size=13
 
 Xft*dpi: 92
 Xft*antialias:  true
