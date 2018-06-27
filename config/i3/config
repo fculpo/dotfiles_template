@@ -30,7 +30,7 @@ set $transparent #00000080
 #=======================
 # Fonts
 #=======================
-font pango:Hack, FontAwesome 11
+font pango:Hack, FontAwesome 12
 
 
 #=======================
@@ -199,10 +199,10 @@ exec --no-startup-id dunst -config ~/.config/dunstrc
 exec urxvtd -o -f -q
 
 # Run terminal containers
-exec i3-msg 'workspace "4:   Term 1 "; exec urxvtc'
-exec i3-msg 'workspace "5:   Term 2 "; exec urxvtc'
-exec i3-msg 'workspace "6:   Term 3 "; exec urxvtc'
-exec i3-msg 'workspace "9:   Chat "; exec urxvtc'
+exec i3-msg 'workspace "4:   Term 1 "; exec "sleep 2; urxvtc"'
+exec i3-msg 'workspace "5:   Term 2 "; exec "sleep 2; urxvtc"'
+exec i3-msg 'workspace "6:   Term 3 "; exec "sleep 2; urxvtc"'
+exec i3-msg 'workspace "9:   Chat "; exec urxvtc -e sh -c "~/wd/poezio/launch.sh"'
 
 # Focus workspace 1 after startup
 exec sleep 1 && i3-msg 'workspace "1:   Web ";'

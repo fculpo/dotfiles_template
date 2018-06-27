@@ -12,9 +12,6 @@
     ~/.config/terminator:
         create: true
         path: config/terminator
-    ~/.config/termite:
-        create: true
-        path: config/termite
     ~/.config/i3:
         create: true
         path: config/i3
