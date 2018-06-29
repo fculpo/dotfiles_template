@@ -1,24 +1,35 @@
 ---
 - hosts: localhost
+  
   vars:
     ansible_python_interpreter: /usr/bin/python3
     pip_package: python3-pip
+    make_threads: 8
+    working_dir: /tmp
+    check_version: 0.12.0
+    rofi_version: 1.5.1
+
   roles:
     - geerlingguy.pip
+
   tasks:
-
-    - name: Ensure Aptitude is installed
-      apt: name=aptitude state=present update_cache=yes
-      become: yes
-
     - name: Update all packages
       apt:  name=* state=latest
+      become: yes
+
+    - name: Ensure Aptitude is installed
+      apt: name=aptitude state=present
       become: yes
 
     - name: Install prerequisites
       apt: name={{ item }} state=present
       become: yes
       with_items:
+        - build-essential
+        - libboost-all-dev
+        - cmake
+        - flex
+        - bison
         - libdbus-1-dev
         - libx11-dev
         - libxinerama-dev
@@ -30,7 +41,6 @@
         - libxdg-basedir-dev
         - libxcb1-dev
         - libxcb-keysyms1-dev
-        - libpango1.0-dev
         - libxcb-util0-dev
         - libxcb-icccm4-dev
         - libyajl-dev
@@ -46,45 +56,129 @@
         - libxcb-xrm0
         - libxcb-xrm-dev
         - automake
+        - librsvg2-dev
+        - check
 
     - name: Install Hack font
       apt: name=fonts-hack-ttf state=present
       become: yes
 
+    - name: Check if i3-gaps is installed
+      command: which i3
+      changed_when: false
+      register: result
+      ignore_errors: yes
+
     - name: Install i3-gaps
       block:
-        - name: Download i3-gaps
-          git:
-            repo: 'https://www.github.com/Airblader/i3'
-            dest: ~/wd/desktop/i3-gaps
+        - git:
+            repo: https://www.github.com/Airblader/i3
+            dest: "{{ working_dir }}/i3-gaps"
 
-        - name: Autoreconf
-          command: autoreconf --force --install && rm -rf build/ && mkdir -p build
+        - command: autoreconf --force --install
           args:
-            chdir: ~/wd/desktop/i3-gaps
-            creates: ~/wd/desktop/i3-gaps/build
+            chdir: "{{ working_dir }}/i3-gaps"
+            creates: "{{ working_dir }}/i3-gaps/Makefile.in"
         
-        - name: configure
-          command: ./configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+        - file: name={{ working_dir }}/i3-gaps/build state=absent
+
+        - file: name={{ working_dir }}/i3-gaps/build state=directory
+
+        - command: ./configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
           args:
-            chdir: ~/wd/desktop/i3-gaps
-        
+            chdir: "{{ working_dir }}/i3-gaps"
+            creates: "{{ working_dir }}/i3-gaps/build/Makefile"
+
         - make:
-            chdir: ~/wd/desktop/i3-gaps
-    
+            chdir: "{{ working_dir }}/i3-gaps/x86_64-pc-linux-gnu"
+
         - make:
-            chdir: ~/wd/desktop/i3-gaps
+            chdir: "{{ working_dir }}/i3-gaps/x86_64-pc-linux-gnu"
             target: install
           become: yes
+        
+        - file: name={{ working_dir }}/i3-gaps state=absent
+      when: result is failed
+
+    - name: Check if dunst is installed
+      command: which dunst
+      changed_when: false
+      register: result
+      ignore_errors: yes
 
     - name: Install dunst
       block:
         - git:
             repo: 'https://github.com/dunst-project/dunst.git'
-            dest: ~/wd/desktop/dunst
+            dest: "{{ working_dir }}/dunst"
         - make:
-            chdir: ~/wd/desktop/dunst
+            chdir: "{{ working_dir }}/dunst"
         - make:
-            chdir: ~/wd/desktop/dunst
+            chdir: "{{ working_dir }}/dunst"
             target: install
           become: yes
+      when: result is failed
+
+    - name: Check if check is installed
+      stat: path=/usr/local/lib/libcheck.so.0.0.0
+      register: result
+    
+    - name: "Install check {{ check_version }}"
+      block:
+        - name: Download check {{ check_version }}
+          unarchive:
+            src: https://github.com/libcheck/check/releases/download/{{ check_version }}/check-{{ check_version }}.tar.gz
+            dest: "{{ working_dir }}"
+            remote_src: yes
+            creates: "{{ working_dir }}/check-{{ check_version }}/Makefile.am"
+
+        - name: configure check
+          command: ./configure
+          args:
+            chdir: "{{ working_dir }}/check-{{ check_version }}"
+            creates: "{{ working_dir }}/check-{{ check_version }}/Makefile"
+
+        - name: make check
+          make:
+            chdir: "{{ working_dir }}/check-{{ check_version }}"
+            params:
+              NUM_THREADS: make_threads
+        
+        - name: make install check
+          make:
+            target: install
+            chdir: "{{ working_dir }}/check-{{ check_version }}"
+          become: yes
+      when: result.stat.exists == False 
+        
+    - name: Check if rofi is installed
+      command: which rofi
+      changed_when: false
+      register: result
+      ignore_errors: yes
+    
+    - name: Install rofi {{ rofi_version }}
+      block:
+        - name: Download rofi {{ rofi_version }}
+          unarchive:
+            src: https://github.com/DaveDavenport/rofi/releases/download/{{ rofi_version }}/rofi-{{ rofi_version }}.tar.gz
+            dest: "{{ working_dir }}"
+            remote_src: yes
+            creates: "{{ working_dir }}/rofi-{{ rofi_version }}/Makefile.am"
+        
+        - name: configure rofi
+          command: ./configure
+          args:
+            chdir: "{{ working_dir }}/rofi-{{ rofi_version }}"
+            creates: "{{ working_dir }}/rofi-{{ rofi_version }}/Makefile"
+
+        - name: make rofi
+          make:
+            chdir: "{{ working_dir }}/rofi-{{ rofi_version }}"
+        
+        - name: make install rofi
+          make:
+            target: install
+            chdir: "{{ working_dir }}/rofi-{{ rofi_version }}"
+          become: yes
+      when: result is failed
