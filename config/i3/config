@@ -168,7 +168,7 @@ bar {
 	separator_symbol "■"
 	height 30
 	tray_padding 0
-	status_command ~/wd/i3status-rust/target/release/i3status-rs ~/.config/i3/status.toml
+	status_command ~/.local/bin/i3status-rs ~/.config/i3/status.toml
 	i3bar_command i3bar -t
 	workspace_buttons       yes
 	strip_workspace_numbers yes
