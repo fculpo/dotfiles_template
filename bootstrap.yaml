@@ -1,30 +1,47 @@
 ---
 - hosts: localhost
-  
+
+  vars_prompt:
+    - name: "ansible_become_pass"
+      prompt: "Sudo password"
+      private: yes
+
   vars:
     ansible_python_interpreter: /usr/bin/python3
     pip_package: python3-pip
-    make_threads: 8
+    make_threads: 4
     working_dir: /tmp
     check_version: 0.12.0
     rofi_version: 1.5.1
 
-  roles:
-    - geerlingguy.pip
-
   tasks:
-    - name: Update all packages
-      apt:  name=* state=latest
-      become: yes
+    - name: Ensure .local/bin is present
+      file: name=$HOME/.local/bin state=directory
 
     - name: Ensure Aptitude is installed
       apt: name=aptitude state=present
       become: yes
 
+    - name: Update all packages
+      apt:  name=* state=latest
+      become: yes
+
+    - name: add libxrm-dev PPA
+      apt_repository:
+        repo: ppa:aguignard/ppa
+      become: yes
+      when: ansible_distribution == 'Ubuntu' and ansible_distribution_version < '16.10'
+
     - name: Install prerequisites
       apt: name={{ item }} state=present
       become: yes
       with_items:
+        - zsh
+        - alsa-utils
+        - lm-sensors
+        - speedtest-cli
+        - fonts-powerline
+        - fonts-font-awesome
         - build-essential
         - libboost-all-dev
         - cmake
@@ -53,11 +70,15 @@
         - libxkbcommon-dev
         - libxkbcommon-x11-dev
         - autoconf
-        - libxcb-xrm0
         - libxcb-xrm-dev
         - automake
         - librsvg2-dev
-        - check
+        - libxcb-ewmh-dev
+
+    - name: Install 16.10+ prerequisites
+      apt: name=libxcb-xrm0
+      become: yes
+      when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '16.10'
 
     - name: Install Hack font
       apt: name=fonts-hack-ttf state=present
@@ -182,3 +203,47 @@
             chdir: "{{ working_dir }}/rofi-{{ rofi_version }}"
           become: yes
       when: result is failed
+    
+    - name: Check if rust is installed
+      command: "ls $HOME/.cargo/bin/cargo"
+      changed_when: false
+      register: result
+      ignore_errors: yes
+
+    - name: Install Rust
+      block:
+        - name: fetch rustup installer
+          get_url:
+            url: https://sh.rustup.rs
+            dest: "{{ working_dir }}"
+            mode: "0755"
+
+        - name: install rustup
+          command: "{{ working_dir }}/rustup-init.sh -y"
+      when: result is failed
+
+
+    - name: check if i3status-rust is present
+      command: "ls $HOME/.local/bin/i3status-rs"
+      changed_when: false
+      register: result
+      ignore_errors: yes
+
+    - name: Install i3-status-rust
+      block:
+        - name: Clone repo
+          git:
+            repo: https://github.com/greshake/i3status-rust.git
+            dest: "{{ working_dir }}/i3status-rust"
+        - name: Build i3-status-rust
+          command: cargo build --release
+          args:
+            chdir: "{{ working_dir }}/i3status-rust"
+            creates: "{{ working_dir }}/i3status-rust/target/release/i3status-rs"
+        - name: move executable
+          command: "cp {{ working_dir }}/i3status-rust/target/release/i3status-rs $HOME/.local/bin/"
+          args:
+            chdir: "{{ working_dir }}/i3status-rust"
+            creates: "$HOME/.local/bin/i3status-rs"
+      when: result is failed
+
