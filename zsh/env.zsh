@@ -19,7 +19,7 @@ fi
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # PATH
-PATH=/usr/local/bin:$HOME/.dotfiles/bin:$HOME/.rbenv/bin:$HOME/.local/bin:$PATH
+PATH=/usr/local/bin:$HOME/.dotfiles/bin:$HOME/.rbenv/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 # Remove Windows paths to Ruby since it causes conflicts with npm/bower/etc.
 # PATH=$(echo :$PATH: | sed -e 's,:/mnt/c/.*:,:,g' -e 's/^://' -e 's/:$//')
