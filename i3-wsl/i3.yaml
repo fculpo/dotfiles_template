@@ -39,6 +39,7 @@
         - zsh
         - rxvt-unicode
         - compton
+        - libnotify-bin
         - feh
         - alsa-utils
         - lm-sensors
