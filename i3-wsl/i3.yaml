@@ -37,6 +37,9 @@
       become: yes
       with_items:
         - zsh
+        - rxvt-unicode
+        - compton
+        - feh
         - alsa-utils
         - lm-sensors
         - speedtest-cli
@@ -100,7 +103,7 @@
           args:
             chdir: "{{ working_dir }}/i3-gaps"
             creates: "{{ working_dir }}/i3-gaps/Makefile.in"
-        
+
         - file: name={{ working_dir }}/i3-gaps/build state=absent
 
         - file: name={{ working_dir }}/i3-gaps/build state=directory
@@ -117,7 +120,7 @@
             chdir: "{{ working_dir }}/i3-gaps/x86_64-pc-linux-gnu"
             target: install
           become: yes
-        
+
         - file: name={{ working_dir }}/i3-gaps state=absent
       when: result is failed
 
@@ -143,7 +146,7 @@
     - name: Check if check is installed
       stat: path=/usr/local/lib/libcheck.so.0.0.0
       register: result
-    
+
     - name: "Install check {{ check_version }}"
       block:
         - name: Download check {{ check_version }}
@@ -164,20 +167,20 @@
             chdir: "{{ working_dir }}/check-{{ check_version }}"
             params:
               NUM_THREADS: make_threads
-        
+
         - name: make install check
           make:
             target: install
             chdir: "{{ working_dir }}/check-{{ check_version }}"
           become: yes
-      when: result.stat.exists == False 
-        
+      when: result.stat.exists == False
+
     - name: Check if rofi is installed
       command: which rofi
       changed_when: false
       register: result
       ignore_errors: yes
-    
+
     - name: Install rofi {{ rofi_version }}
       block:
         - name: Download rofi {{ rofi_version }}
@@ -186,7 +189,7 @@
             dest: "{{ working_dir }}"
             remote_src: yes
             creates: "{{ working_dir }}/rofi-{{ rofi_version }}/Makefile.am"
-        
+
         - name: configure rofi
           command: ./configure
           args:
@@ -196,14 +199,14 @@
         - name: make rofi
           make:
             chdir: "{{ working_dir }}/rofi-{{ rofi_version }}"
-        
+
         - name: make install rofi
           make:
             target: install
             chdir: "{{ working_dir }}/rofi-{{ rofi_version }}"
           become: yes
       when: result is failed
-    
+
     - name: Check if rust is installed
       command: "ls $HOME/.cargo/bin/cargo"
       changed_when: false
