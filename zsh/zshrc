@@ -13,8 +13,6 @@ source ~/.dotfiles/zsh/aliases.zsh
 # Agents
 #=======================
 
-export XDG_RUNTIME_DIR=~/.ssh
-
 if [ ! -S "$XDG_RUNTIME_DIR/ssh-agent.sock" ]; then
     eval `ssh-agent -a $XDG_RUNTIME_DIR/ssh-agent.sock` &>/dev/null
 else

@@ -9,6 +9,12 @@ export DOTFILES="$HOME/.dotfiles"
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# XDG
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_HOME=$HOME/.runtime
+
 # WSL
 if [ -n $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/p') ]; then
     export LIBGL_ALWAYS_INDIRECT=1
