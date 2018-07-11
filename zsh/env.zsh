@@ -20,6 +20,7 @@ if [ -n $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/p') ]; then
     export LIBGL_ALWAYS_INDIRECT=1
     export PULSE_SERVER=tcp:localhost
     export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+    export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
     export DISPLAY=:0.0
 fi
 
