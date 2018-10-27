@@ -1,5 +1,7 @@
 zmodload zsh/zpty
 
+unsetopt BEEP
+
 # workaround for WSL
 unsetopt BG_NICE
 

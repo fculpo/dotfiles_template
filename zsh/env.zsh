@@ -19,7 +19,6 @@ export XDG_RUNTIME_DIR=$HOME/.runtime
 if [ -n $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/p') ]; then
     export LIBGL_ALWAYS_INDIRECT=1
     export PULSE_SERVER=tcp:localhost
-    export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
     export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
     export DISPLAY=:0.0
 fi
@@ -31,7 +30,7 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=1
 PATH=/usr/local/bin:$HOME/.dotfiles/bin:$HOME/.rbenv/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 # Remove Windows paths to Ruby since it causes conflicts with npm/bower/etc.
-# PATH=$(echo :$PATH: | sed -e 's,:/mnt/c/.*:,:,g' -e 's/^://' -e 's/:$//')
+PATH=$(echo :$PATH: | sed -e 's,:/mnt/c/.*:,:,g' -e 's/^://' -e 's/:$//')
 
 typeset -U PATH # Remove duplicates in $PATH
 
