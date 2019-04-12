@@ -27,17 +27,12 @@ autocmd BufEnter * match ExtraWhitespace /\s\+$/
 "remove trailing whitespaces
 :command Rs %s/\s\+$//g
 
-" make -> perl -c
-":w -> make
-"autocmd FileType perl set makeprg=perl\ -c\ %\ $*
-"autocmd FileType perl set errorformat=%f:%l:%m
-"autocmd BufWritePost *.pl,*.pm make
-
 " allow autofolding with SPACE
 nnoremap <silent> <Space> @=(foldlevel('.')?"za\|zd":"zfa}")<CR>
 nnoremap <F5> :GundoToggle<CR>
 
-set relativenumber
+set norelativenumber
+set number
 set cursorline " highlight current line
 set wildmenu " visual autocomplete for command menu
 
