@@ -23,11 +23,17 @@ if [ -n $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/p') ]; then
     export DISPLAY=:0.0
 fi
 
+# KUBE
+export KUBECONFIG=$HOME/.kube/kubeconfig.yml
+
+# DOCKER FOR WINDOWS
+export DOCKER_HOST=tcp://localhost:2375
+
 # Faster autosuggest
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # PATH
-PATH=/usr/local/bin:$HOME/.dotfiles/bin:$HOME/.rbenv/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+PATH=/usr/local/bin:$HOME/.dotfiles/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 # Remove Windows paths to Ruby since it causes conflicts with npm/bower/etc.
 PATH=$(echo :$PATH: | sed -e 's,:/mnt/c/.*:,:,g' -e 's/^://' -e 's/:$//')

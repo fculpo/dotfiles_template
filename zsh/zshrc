@@ -5,6 +5,10 @@ unsetopt BEEP
 # workaround for WSL
 unsetopt BG_NICE
 
+source ~/.kube-ps1/kube-ps1.sh
+
+fpath+=( $HOME/.dotfiles/zsh/completions )
+
 source ~/.zsh-plugins.sh
 source ~/.dotfiles/zsh/env.zsh
 source ~/.dotfiles/zsh/options.zsh
@@ -13,24 +17,22 @@ source ~/.dotfiles/zsh/aliases.zsh
 source ~/.dotfiles/zsh/functions.zsh
 
 #=======================
-# Agents
-#=======================
-
-if [ ! -S "$XDG_RUNTIME_DIR/ssh-agent.sock" ]; then
-    eval `ssh-agent -a $XDG_RUNTIME_DIR/ssh-agent.sock` &>/dev/null
-else
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.sock"
-fi
-
-if [ ! -f "$XDG_RUNTIME_DIR/gpg-agent.info" ]; then
-    gpg-agent --daemon --write-env-file $XDG_RUNTIME_DIR/gpg-agent.info &>/dev/null
-else
-    source $XDG_RUNTIME_DIR/gpg-agent.info
-    export GPG_AGENT_INFO
-fi
-
-#=======================
 # GVM
 #=======================
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+
+#=======================
+# LOCAL FILES 
+#=======================
+
+# Load all files from zshrc.d directory
+if [ -d $HOME/zshrc.d ]; then
+    for file in $HOME/zshrc.d/*.zsh; do
+        source $file
+    done
+fi
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

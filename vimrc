@@ -72,7 +72,6 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 
 Plug 'tpope/vim-sensible'
-"Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
@@ -84,7 +83,6 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/fzf'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
-Plug 'airblade/vim-gitgutter'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
