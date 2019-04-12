@@ -11,6 +11,7 @@
     ~/.config/fish/config.fish: fish/config.fish
     ~/.config/fish/aliases.fish: fish/aliases.fish
     ~/.config/fish/exports.fish: fish/exports.fish
+    ~/.config/fish/fishfile: fish/fishfile
     ~/.config/fish/conf.d: fish/conf.d
     ~/.config/fish/completions: fish/completions
     ~/.config/fish/functions.fish: fish/functions.fish
@@ -28,4 +29,4 @@
     - curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
     - curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -sLo $HOME/.local/bin/kubectx
     - curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -sLo $HOME/.local/bin/kubens
-    - fisher add rafaelrinaldi/pure edc/bass franciscolourenco/done jethrokuan/z jethrokuan/fzf laughedelic/pisces oh-my-fish/plugin-bang-bang
+    - fish -c "fisher"
