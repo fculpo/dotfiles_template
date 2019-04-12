@@ -21,12 +21,13 @@
     -
       command: bash -c "if [ ! -f ~/.vim/autoload/plug.vim ]; then curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; fi;"
       description: Install vimplug if not already
+    - mkdir -p ~/.local/bin
     - bash -c "if [ ! -d "$HOME/.fzf" ]; then git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; fi;"
-    - bash -c "if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi;"
-    - bash -c "if [ ! -d "$HOME/.tmux" ]; then git clone https://github.com/gpakosz/.tmux.git ~/.tmux; fi;"
-    - ln -s -f .tmux/.tmux.conf ~/.tmux.conf
     - echo 'y' | ~/.fzf/install
+    - bash -c "if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi;"
+    - bash -c "if [ ! -d "$HOME/.tmux-config" ]; then git clone https://github.com/gpakosz/.tmux.git ~/.tmux-config; fi;"
+    - ln -s -f ~/.tmux-config/.tmux.conf ~/.tmux.conf
     - curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-    - curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -sLo $HOME/.local/bin/kubectx
-    - curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -sLo $HOME/.local/bin/kubens
+    - curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -sLo "$HOME/.local/bin/kubectx"
+    - curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -sLo "$HOME/.local/bin/kubens"
     - fish -c "fisher"
