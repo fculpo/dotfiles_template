@@ -309,13 +309,13 @@ set-option -g bell-action none
 set -g @continuum-restore 'on'
 
 # Plugins
-
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @tpm_plugins ' \
+   tmux-plugins/tpm \
+   tmux-plugins/tmux-resurrect \
+   tmux-plugins/tmux-continuum \
+   tmux-plugins/tmux-yank \
+   tmux-plugins/tmux-copycat \
+ '
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'
