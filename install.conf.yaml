@@ -8,6 +8,7 @@
     ~/.zshrc: zsh/zshrc
     ~/.tmux.conf.local: tmux/tmux.conf.local
     ~/.vimrc: vimrc
+    ~/.config/kitty/kitty.conf: kitty/kitty.conf
     ~/.config/fish/config.fish: fish/config.fish
     ~/.config/fish/aliases.fish: fish/aliases.fish
     ~/.config/fish/exports.fish: fish/exports.fish

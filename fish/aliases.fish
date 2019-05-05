@@ -33,3 +33,5 @@ alias fs="stat -f \"%z bytes\""
 
 # Kube
 alias k=kubectl
+
+alias vi=vim
