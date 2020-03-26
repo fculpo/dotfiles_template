@@ -8,8 +8,6 @@ if test -e "$HOME/.extra.fish";
 	source ~/.extra.fish
 end
 
-export GOPATH=$HOME/.go/
-
 # Completions
 function make_completion --argument-names alias command
     echo "

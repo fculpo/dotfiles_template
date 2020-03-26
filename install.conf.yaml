@@ -7,20 +7,16 @@
 - link:
     ~/.zshrc: zsh/zshrc
     ~/.tmux.conf.local: tmux/tmux.conf.local
-    ~/.vimrc: vimrc
-    ~/.config/kitty/kitty.conf: kitty/kitty.conf
+    ~/.vimrc: vim/vimrc
     ~/.config/fish/config.fish: fish/config.fish
     ~/.config/fish/aliases.fish: fish/aliases.fish
     ~/.config/fish/exports.fish: fish/exports.fish
     ~/.config/fish/fishfile: fish/fishfile
-    ~/.config/fish/conf.d: fish/conf.d
-    ~/.config/fish/completions: fish/completions
     ~/.config/fish/functions.fish: fish/functions.fish
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
-    -
-      command: bash -c "if [ ! -f ~/.vim/autoload/plug.vim ]; then curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; fi;"
+    - command: bash -c "if [ ! -f ~/.vim/autoload/plug.vim ]; then curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; fi;"
       description: Install vimplug if not already
     - mkdir -p ~/.local/bin
     - bash -c "if [ ! -d "$HOME/.fzf" ]; then git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; fi;"
