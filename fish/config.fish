@@ -1,4 +1,3 @@
-
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/functions.fish
 source ~/.config/fish/exports.fish
@@ -70,8 +69,6 @@ set __fish_git_prompt_color_upstream_ahead ffb90f
 set __fish_git_prompt_color_upstream_behind blue
 
 # Local prompt customization
-set -e fish_greeting
-
 set -g fish_pager_color_completion normal
 set -g fish_pager_color_description 555 yellow
 set -g fish_pager_color_prefix cyan
