@@ -7,20 +7,6 @@ if test -e "$HOME/.extra.fish";
 	source ~/.extra.fish
 end
 
-# Completions
-function make_completion --argument-names alias command
-    echo "
-    function __alias_completion_$alias
-        set -l cmd (commandline -o)
-        set -e cmd[1]
-        complete -C\"$command \$cmd\"
-    end
-    " | .
-    complete -c $alias -a "(__alias_completion_$alias)"
-end
-
-make_completion g 'git'
-
 # Readline colors
 set -g fish_color_autosuggestion 555 yellow
 set -g fish_color_command 5f87d7
@@ -41,21 +27,12 @@ set -g fish_color_search_match --background=purple
 set -g fish_color_status 5f0000
 set -g fish_color_user 5f875f
 set -g fish_color_valid_path --underline
-
 set -g fish_color_dimmed 555
 set -g fish_color_separator 999
 
 # Git prompt status
 set -g __fish_git_prompt_showdirtystate 'yes'
 set -g __fish_git_prompt_showupstream auto
-set -g pure_git_untracked_dirty false
-
-# pure
-set pure_threshold_command_duration 1
-set pure_separate_prompt_on_error true
-set pure_begin_prompt_with_current_directory false
-set -U pure_color_success (set_color green)
-set -U pure_color_git_dirty (set_color cyan)
 
 # Status Chars
 #set __fish_git_prompt_char_dirtystate '*'
@@ -73,7 +50,6 @@ set -g fish_pager_color_completion normal
 set -g fish_pager_color_description 555 yellow
 set -g fish_pager_color_prefix cyan
 set -g fish_pager_color_progress cyan
-
 
 # highlighting inside manpages and elsewhere
 set -gx LESS_TERMCAP_mb \e'[01;31m'       # begin blinking

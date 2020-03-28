@@ -6,4 +6,4 @@ edc/bass
 oh-my-fish/plugin-bang-bang
 rbenv/fish-rbenv
 danhper/fish-ssh-agent
-matchai/spacefish
+oh-my-fish/plugin-brew

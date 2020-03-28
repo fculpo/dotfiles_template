@@ -1,37 +1,34 @@
-# Navigation
-function ..    ; cd .. ; end
-function ...   ; cd ../.. ; end
-function ....  ; cd ../../.. ; end
-function ..... ; cd ../../../.. ; end
-
-# Utilities
-function g        ; git $argv ; end
-function grep     ; command grep --color=auto $argv ; end
-
-alias chmox='chmod +x'
-
-alias cask='brew cask' # i <3 u cask
-alias where=which # sometimes i forget
-
-alias push="git push"
-alias master="git checkout master"
+abbr -a chmox "chmod +x"
+abbr -a cask "brew cask"
 
 # Networking. IP address, dig, DNS
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias dig="dig +nocmd any +multiline +noall +answer"
-# wget sucks with certificates. Let's keep it simple.
-alias wget="curl -O"
+abbr -a ip "dig +short myip.opendns.com @resolver1.opendns.com"
+abbr -a dig "dig +nocmd any +multiline +noall +answer"
 
-# Shortcuts
-alias g="git"
-alias gi="git"
-alias v="vim"
-alias ungz="gunzip -k"
+# wget sucks with certificates. Let's keep it simple.
+abbr -a wget "curl -O"
 
 # File size
-alias fs="stat -f \"%z bytes\""
+abbr -a fs "stat -f \"%z bytes\""
 
-# Kube
-alias k=kubectl
+abbr -a k kubectl
+abbr -a vi vim
 
-alias vi=vim
+# git
+abbr -a gs  git status -sb
+abbr -a ga  git add
+abbr -a gc  git commit
+abbr -a gcm git commit -m
+abbr -a gca git commit --amend
+abbr -a gcl git clone
+abbr -a gco git checkout
+abbr -a gp  git push
+abbr -a gpl git pull
+abbr -a gl  git l
+abbr -a gd  git diff
+abbr -a gds git diff --staged
+abbr -a gr  git rebase -i HEAD~15
+abbr -a gf  git fetch
+abbr -a gfc git findcommit
+abbr -a gfm git findmessage
+abbr -a gco git checkout
