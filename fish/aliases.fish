@@ -1,8 +1,5 @@
-abbr -a chmox "chmod +x"
 abbr -a cask "brew cask"
 
-# Networking. IP address, dig, DNS
-abbr -a ip "dig +short myip.opendns.com @resolver1.opendns.com"
 abbr -a dig "dig +nocmd any +multiline +noall +answer"
 
 # wget sucks with certificates. Let's keep it simple.
