@@ -9,9 +9,14 @@ abbr -a wget "curl -O"
 abbr -a fs "stat -f \"%z bytes\""
 
 abbr -a k kubectl
+abbr -a kg kubectl get
+abbr -a kga kubectl get all
 abbr -a vi vim
 
+abbr -a which which -a
+
 # git
+abbr -a g git
 abbr -a gs  git status -sb
 abbr -a ga  git add
 abbr -a gc  git commit

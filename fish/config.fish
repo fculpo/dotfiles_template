@@ -8,7 +8,7 @@ if test -e "$HOME/.extra.fish";
 end
 
 # No greeting
-set -gx fish_greeting ""
+set -g fish_greeting ""
 
 # Readline colors
 set -g fish_color_autosuggestion 555 yellow
