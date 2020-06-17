@@ -10,6 +10,8 @@ abbr -a fs "stat -f \"%z bytes\""
 
 abbr -a k kubectl
 abbr -a kg kubectl get
+abbr -a kgp kubectl get pods
+abbr -a kgpw kubectl get pods -owide
 abbr -a kga kubectl get all
 abbr -a vi vim
 

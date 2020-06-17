@@ -2,12 +2,14 @@
     link:
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.zshrc: zsh/zshrc
     ~/.tmux.conf.local: tmux/tmux.conf.local
     ~/.vimrc: vim/vimrc
+    ~/.config/skhd/skhdrc: config/skhd/skhdrc
+    ~/.config/yabai/yabairc: config/yabai/yabairc
     ~/.config/fish/config.fish: fish/config.fish
     ~/.config/fish/aliases.fish: fish/aliases.fish
     ~/.config/fish/exports.fish: fish/exports.fish
