@@ -4,6 +4,11 @@
 
 - clean: ["~"]
 
+- create:
+    - ~/.config/fish/functions
+    - ~/.config/skhd
+    - ~/.config/yabai
+
 - link:
     ~/.zshrc: zsh/zshrc
     ~/.tmux.conf.local: tmux/tmux.conf.local
@@ -22,6 +27,8 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
+    - description: Install apt packages
+      command: bash -c "if [ $(uname -s) == "Linux" ]; then apt install -y gcc htop fish; fi;"
     - description: Install vimplug if not already
       command: bash -c "if [ ! -f ~/.vim/autoload/plug.vim ]; then curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; fi;"
     - description: Install fzf
@@ -34,3 +41,9 @@
       command: curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
     - description: Fisher
       command: fish -c "fisher"
+    - description: Install rust
+      command: bash -c "if ! command -v cargo; then curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; fi;"
+    - description: Install bat
+      command: bash -c "if ! command -v bat; then echo 1 | cargo install --locked bat; fi;"
+    - description: Install exa
+      command: bash -c "if ! command -v exa; then cargo install exa; fi;"
