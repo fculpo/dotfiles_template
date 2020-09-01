@@ -2,6 +2,8 @@ source ~/.config/fish/aliases.fish
 source ~/.config/fish/functions.fish
 source ~/.config/fish/exports.fish
 
+starship init fish | source
+
 # for things not checked into git..
 if test -e "$HOME/.extra.fish";
 	source ~/.extra.fish
