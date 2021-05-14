@@ -1,31 +1,134 @@
-zmodload zsh/zpty
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-unsetopt BEEP
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_SAVE_NO_DUPS # Do not write a duplicate event to the history file.
+setopt inc_append_history  # Immediately append to the history file, not just when a term is killed
 
-# workaround for WSL
-unsetopt BG_NICE
+setopt notify
+unsetopt beep
 
-source ~/.kube-ps1/kube-ps1.sh
+zstyle :compinstall filename '/Users/fculpo/.zshrc'
+setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
+setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
+setopt PATH_DIRS           # Perform path search even on command names with slashes.
+setopt AUTO_MENU           # Show completion menu on a successive tab press.
+setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
+setopt EXTENDED_GLOB       # Needed for file modification glob modifiers with compinit
+unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
+# unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 
-fpath+=( $HOME/.dotfiles/zsh/completions )
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+unsetopt CASE_GLOB
 
-source ~/.zsh-plugins.sh
-source ~/.dotfiles/zsh/env.zsh
-source ~/.dotfiles/zsh/options.zsh
-source ~/.dotfiles/zsh/bindings.zsh
-source ~/.dotfiles/zsh/aliases.zsh
-source ~/.dotfiles/zsh/functions.zsh
+# Group matches and describe.
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{green}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose yes
 
-#=======================
-# GVM
-#=======================
+# Fuzzy match mistyped completions.
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+# Directories
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
+zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
+zstyle ':completion:*' squeeze-slashes true
+
+# Don't complete uninteresting users...
+zstyle ':completion:*:*:*:users' ignored-patterns \
+  adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+  dbus distcache docker dovecot fax ftp games gdm gkrellmd gopher \
+  hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+  mailman mailnull mldonkey mysql nagios \
+  named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+  operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+  rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
+
+# Load aliases
+source $HOME/.dotfiles/zsh/aliases.zsh
+
+### Zplug start
+source ~/.zplug/init.zsh
+
+# Plugins
+zplug "plugins/osx", from:oh-my-zsh
+zplug "clvv/fasd"
+zplug "junegunn/fzf"
+zplug 'wfxr/forgit'
+zplug "agkozak/zsh-z"
+zplug "plugins/pass", from:oh-my-zsh
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "romkatv/powerlevel10k", as:theme, depth:1
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 
 
-#=======================
-# LOCAL FILES 
-#=======================
+# Then, source plugins and add commands to $PATH
+zplug load
+
+### Zplug end
+
+bindkey -v
+
+# Gray color for autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
+
+# Colorizes ls on macOS
+export CLICOLOR=1
+
+# Pagination in autocompletion
+#export PAGER="less"
+
+bindkey "^[[3~" delete-char
+bindkey "^[[1;2D" backward-word # Shift <-
+bindkey "^[[1;2C" forward-word  # Shift ->
+
+bindkey "^f" beginning-of-line
+bindkey "^g" end-of-line
+bindkey "^k" forward-word
+bindkey "^j" backward-word
+bindkey "^e" kill-whole-line
+
+# zsh-users/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
 
 # Load all files from zshrc.d directory
 if [ -d $HOME/zshrc.d ]; then
@@ -34,8 +137,16 @@ if [ -d $HOME/zshrc.d ]; then
     done
 fi
 
+export PATH="/Users/fculpo/.local/bin/:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+autoload -Uz compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/fculpo/.local/bin/tk tk
+complete -o nospace -C /usr/local/bin/terraform terraform

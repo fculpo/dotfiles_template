@@ -2,7 +2,7 @@
     link:
       relink: true
 
-- clean: ["~"]
+- clean: ["all"]
 
 - create:
     - ~/.config/fish/functions
@@ -11,6 +11,7 @@
 
 - link:
     ~/.zshrc: zsh/zshrc
+    ~/.zshenv: zsh/zshenv
     ~/.tmux.conf.local: tmux/tmux.conf.local
     ~/.vimrc: vim/vimrc
     ~/.config/skhd/skhdrc: config/skhd/skhdrc
@@ -25,28 +26,28 @@
       path: fish/functions/*
     ~/.config/starship.toml: starship/starship.toml
 
-- shell:
-    - description: Install apt packages
-      command: bash -c "if [ $(uname -s) == "Linux" ]; then apt update; apt install -y gcc htop fish; fi;"
-    - description: Switch to fish shell
-      command: chsh -s $(which fish)
-    - description: Install starship.rs
-      command: bash -c "if ! command -v starship; then curl -fsSL https://starship.rs/install.sh | bash -s -- -y; fi;"
-    - description: Install vimplug if not already
-      command: bash -c "if [ ! -f ~/.vim/autoload/plug.vim ]; then curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; fi;"
-    - description: Install fzf
-      command: bash -c "if [ ! -d "$HOME/.fzf" ]; then git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; fi; echo 'y' | ~/.fzf/install"
-    - description: Install tmux plugins
-      command: bash -c "if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi;"
-    - description: Install Oh My Tmux!
-      command: bash -c "if [ ! -d "$HOME/.tmux-config" ]; then git clone https://github.com/gpakosz/.tmux.git ~/.tmux-config; fi; ln -s -f ~/.tmux-config/.tmux.conf ~/.tmux.conf"
-    - description: Install fisher
-      command: curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-    - description: Fisher
-      command: fish -c "fisher"
-    - description: Install rust
-      command: bash -c "if ! command -v $HOME/.cargo/bin/cargo; then echo 1 | curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y; fi;"
-    - description: Install bat
-      command: bash -c "if ! command -v bat; then echo 1 | $HOME/.cargo/bin/cargo install --locked bat; fi;"
-    - description: Install exa
-      command: bash -c "if ! command -v exa; then $HOME/.cargo/bin/cargo install exa; fi;"
+# - shell:
+#     - description: Install apt packages
+#       command: bash -c "if [ $(uname -s) == "Linux" ]; then apt update; apt install -y gcc htop fish; fi;"
+#     - description: Switch to zsh shell
+#       command: chsh -s $(which zsh)
+#     - description: Install starship.rs
+#       command: bash -c "if ! command -v starship; then curl -fsSL https://starship.rs/install.sh | bash -s -- -y; fi;"
+#     - description: Install vimplug if not already
+#       command: bash -c "if [ ! -f ~/.vim/autoload/plug.vim ]; then curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim; fi;"
+#     - description: Install fzf
+#       command: bash -c "if [ ! -d "$HOME/.fzf" ]; then git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; fi; echo 'y' | ~/.fzf/install"
+#     - description: Install tmux plugins
+#       command: bash -c "if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm; fi;"
+#     - description: Install Oh My Tmux!
+#       command: bash -c "if [ ! -d "$HOME/.tmux-config" ]; then git clone https://github.com/gpakosz/.tmux.git ~/.tmux-config; fi; ln -s -f ~/.tmux-config/.tmux.conf ~/.tmux.conf"
+#     - description: Install fisher
+#       command: curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+#     - description: Fisher
+#       command: fish -c "fisher"
+#     - description: Install rust
+#       command: bash -c "if ! command -v $HOME/.cargo/bin/cargo; then echo 1 | curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y; fi;"
+#     - description: Install bat
+#       command: bash -c "if ! command -v bat; then echo 1 | $HOME/.cargo/bin/cargo install --locked bat; fi;"
+#     - description: Install exa
+#       command: bash -c "if ! command -v exa; then $HOME/.cargo/bin/cargo install exa; fi;"

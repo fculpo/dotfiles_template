@@ -1,39 +1,37 @@
-abbr -a cask "brew cask"
-
-abbr -a dig "dig +nocmd any +multiline +noall +answer"
+abbr -ag cask "brew cask"
 
 # wget sucks with certificates. Let's keep it simple.
-abbr -a wget "curl -O"
+abbr -ag wget "curl -O"
 
 # File size
-abbr -a fs "stat -f \"%z bytes\""
+abbr -ag fs "stat -f \"%z bytes\""
 
-abbr -a k kubectl
-abbr -a kg kubectl get
-abbr -a kgp kubectl get pods
-abbr -a kgpw kubectl get pods -owide
-abbr -a kd kubectl describe
-abbr -a kga kubectl get all
-abbr -a vi vim
+abbr -ag k kubectl
+abbr -ag kg kubectl get
+abbr -ag kgp kubectl get pods
+abbr -ag kgpw kubectl get pods -owide
+abbr -ag kd kubectl describe
+abbr -ag kga kubectl get all
+abbr -ag vi vim
 
-abbr -a which which -a
+abbr -ag which which -a
 
 # git
-abbr -a g git
-abbr -a gs  git status -sb
-abbr -a ga  git add
-abbr -a gc  git commit
-abbr -a gcm git commit -m
-abbr -a gca git commit --amend
-abbr -a gcl git clone
-abbr -a gco git checkout
-abbr -a gp  git push
-abbr -a gpl git pull
-abbr -a gl  git l
-abbr -a gd  git diff
-abbr -a gds git diff --staged
-abbr -a gr  git rebase -i HEAD~15
-abbr -a gf  git fetch
-abbr -a gfc git findcommit
-abbr -a gfm git findmessage
-abbr -a gco git checkout
+abbr -ag g git
+abbr -ag gs  git status -sb
+abbr -ag ga  git add
+abbr -ag gc  git commit
+abbr -ag gcm git commit -m
+abbr -ag gca git commit --amend
+abbr -ag gcl git clone
+abbr -ag gco git checkout
+abbr -ag gp  git push
+abbr -ag gpl git pull
+abbr -ag gl  git l
+abbr -ag gd  git diff
+abbr -ag gds git diff --staged
+abbr -ag gr  git rebase -i HEAD~15
+abbr -ag gf  git fetch
+abbr -ag gfc git findcommit
+abbr -ag gfm git findmessage
+abbr -ag gco git checkout

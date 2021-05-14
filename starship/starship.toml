@@ -1,2 +1,5 @@
 [kubernetes]
 disabled = false
+
+[terraform]
+disabled = true
